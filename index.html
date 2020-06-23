@@ -74,6 +74,12 @@
         padding: 32px 32px;
     }
 
+    details{
+      font-size: 16px;
+      padding: 4px;
+      text-decoration: underline;
+      color:#206095 !important
+    }
 
 	</style>
 
@@ -88,6 +94,7 @@
 <div id='page'>
     <h2 class="heading">Deaths: Find answers to your questions</h2>
     <div id="links"></div>
+    <div id="twisty"></div>
 </div>
 
 <script>
@@ -117,15 +124,42 @@ Papa.parse(publicSpreadsheetUrl, {
         var i;
 
         for (i = 0; i < data.length; i++) {
+          if(i<5){
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(data[i].title);
+            a.appendChild(linkText);
+            a.title = data[i].title;
+            a.href = data[i].url;
+            document.getElementById('links').appendChild(a);
+          } else if (i==5){
+            var dets = document.createElement("DETAILS")
+            dets.setAttribute("id", "details");
+            var summary = document.createElement('summary');
+            var text = document.createTextNode("More links")
+            summary.appendChild(text)
+            dets.appendChild(summary)
+            //dets.innerHTML("More links")
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(data[i].title);
+            a.appendChild(linkText);
+            a.title = data[i].title;
+            a.href = data[i].url;
+            dets.appendChild(a)
+            document.getElementById('twisty').appendChild(dets);
 
-          var a = document.createElement('a');
-          var linkText = document.createTextNode(data[i].title);
-          a.appendChild(linkText);
-          a.title = data[i].title;
-          a.href = data[i].url;
-          document.getElementById('links').appendChild(a);
+          } else {
+            var a = document.createElement('a');
+            var linkText = document.createTextNode(data[i].title);
+            a.appendChild(linkText);
+            a.title = data[i].title;
+            a.href = data[i].url;
+            document.getElementById('details').appendChild(a);
+          }
+
         }
-
+        document.getElementById("details").addEventListener("click", function() {
+            setTimeout(function(){ pymChild.sendHeight(); }, 50);
+        });
         pymChild.sendHeight()
       }
 
