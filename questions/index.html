@@ -12,7 +12,7 @@
   <!-- End Google Tag Manager -->
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <title>Related links</title>
+    <title>Deaths related links -  questions</title>
 
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -141,9 +141,9 @@ Papa.parse(publicSpreadsheetUrl, {
         for (i = 0; i < data.length; i++) {
           if(i<5){
             var a = document.createElement('a');
-            var linkText = document.createTextNode(data[i].title);
+            var linkText = document.createTextNode(data[i].question);
             a.appendChild(linkText);
-            a.title = data[i].title;
+            a.title = data[i].question;
             a.href = data[i].url;
             a.target = "_blank";
             document.getElementById('links').appendChild(a);
@@ -156,9 +156,9 @@ Papa.parse(publicSpreadsheetUrl, {
             dets.appendChild(summary)
             //dets.innerHTML("More links")
             var a = document.createElement('a');
-            var linkText = document.createTextNode(data[i].title);
+            var linkText = document.createTextNode(data[i].question);
             a.appendChild(linkText);
-            a.title = data[i].title;
+            a.title = data[i].question;
             a.href = data[i].url;
             a.target = "_blank";
             dets.appendChild(a)
@@ -166,9 +166,9 @@ Papa.parse(publicSpreadsheetUrl, {
 
           } else {
             var a = document.createElement('a');
-            var linkText = document.createTextNode(data[i].title);
+            var linkText = document.createTextNode(data[i].question);
             a.appendChild(linkText);
-            a.title = data[i].title;
+            a.title = data[i].question;
             a.href = data[i].url;
             a.target = "_blank";
             document.getElementById('details').appendChild(a);
@@ -183,7 +183,7 @@ Papa.parse(publicSpreadsheetUrl, {
           x[i].addEventListener("click", function(){
             dataLayer.push({
               'event': 'urlClicked',
-              'selected': this.title
+              'selected': this.question
             })
           })
         }
