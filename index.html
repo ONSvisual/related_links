@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MBCBVQS');</script>
+  <!-- End Google Tag Manager -->
+
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <title>Related links</title>
 
@@ -91,6 +100,12 @@
 
 <body>
 
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MBCBVQS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
 <div id='page'>
     <h2 class="heading">Deaths: Find answers to your questions</h2>
     <div id="links"></div>
@@ -130,6 +145,7 @@ Papa.parse(publicSpreadsheetUrl, {
             a.appendChild(linkText);
             a.title = data[i].title;
             a.href = data[i].url;
+            a.target = "_blank";
             document.getElementById('links').appendChild(a);
           } else if (i==5){
             var dets = document.createElement("DETAILS")
@@ -144,6 +160,7 @@ Papa.parse(publicSpreadsheetUrl, {
             a.appendChild(linkText);
             a.title = data[i].title;
             a.href = data[i].url;
+            a.target = "_blank";
             dets.appendChild(a)
             document.getElementById('twisty').appendChild(dets);
 
@@ -153,11 +170,32 @@ Papa.parse(publicSpreadsheetUrl, {
             a.appendChild(linkText);
             a.title = data[i].title;
             a.href = data[i].url;
+            a.target = "_blank";
             document.getElementById('details').appendChild(a);
           }
 
         }
+
+
+        var x, i;
+        x = document.querySelectorAll("a");
+        for (i = 0; i < x.length; i++) {
+          x[i].addEventListener("click", function(){
+            dataLayer.push({
+              'event': 'urlClicked',
+              'selected': this.title
+            })
+          })
+        }
+
+
         document.getElementById("details").addEventListener("click", function() {
+
+            dataLayer.push({
+              'event': 'twistyClicked',
+              'selected': "Twisty clicked"
+            })
+
             setTimeout(function(){ pymChild.sendHeight(); }, 50);
         });
         pymChild.sendHeight()
