@@ -119,6 +119,7 @@ var pymChild = new pym.Child();
 // get google sheets data
 //var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTpesCEUV28bm-A1BxwWwUH2fjR_TtuWcKN1TreRECJJKmfzLV5HEYKmElFPZaiIETu-3D2Z0BjBpR0/pub?output=csv';
 var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/19nNGaTCNUzsSStsSlwd1zs_LpfcBAWK1JP5Pc28WtLI/gviz/tq?tqx=out:csv'
+
 var data_links;
 
 function init() {
@@ -181,9 +182,11 @@ Papa.parse(publicSpreadsheetUrl, {
         x = document.querySelectorAll("a");
         for (i = 0; i < x.length; i++) {
           x[i].addEventListener("click", function(){
+
+            //console.log(this.title)
             dataLayer.push({
               'event': 'urlClicked',
-              'selected': this.statement
+              'selected': this.title
             })
           })
         }

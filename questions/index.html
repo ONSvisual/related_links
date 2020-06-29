@@ -182,9 +182,12 @@ Papa.parse(publicSpreadsheetUrl, {
         x = document.querySelectorAll("a");
         for (i = 0; i < x.length; i++) {
           x[i].addEventListener("click", function(){
+
+
+          //  console.log(this.title)
             dataLayer.push({
               'event': 'urlClicked',
-              'selected': this.question
+              'selected': this.title
             })
           })
         }
